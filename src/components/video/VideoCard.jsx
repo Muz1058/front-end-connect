@@ -5,21 +5,8 @@ import { MoreVertical, Clock } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { Link } from "react-router-dom";
 
-interface VideoCardProps {
-  id: string;
-  title: string;
-  thumbnail: string;
-  duration: string;
-  views: number;
-  createdAt: string;
-  channel: {
-    name: string;
-    avatar: string;
-  };
-}
-
-const VideoCard = ({ id, title, thumbnail, duration, views, createdAt, channel }: VideoCardProps) => {
-  const formatViews = (count: number) => {
+const VideoCard = ({ id, title, thumbnail, duration, views, createdAt, channel }) => {
+  const formatViews = (count) => {
     if (count >= 1000000) {
       return `${(count / 1000000).toFixed(1)}M`;
     } else if (count >= 1000) {

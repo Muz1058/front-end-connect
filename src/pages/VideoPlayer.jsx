@@ -33,7 +33,7 @@ const VideoPlayer = () => {
     }
   };
 
-  const formatViews = (count: number) => {
+  const formatViews = (count) => {
     if (count >= 1000000) {
       return `${(count / 1000000).toFixed(1)}M`;
     } else if (count >= 1000) {
@@ -42,7 +42,7 @@ const VideoPlayer = () => {
     return count.toString();
   };
 
-  const formatNumber = (num: number) => {
+  const formatNumber = (num) => {
     return new Intl.NumberFormat().format(num);
   };
 

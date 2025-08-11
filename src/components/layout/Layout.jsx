@@ -1,12 +1,7 @@
-import { ReactNode } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children }) => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
