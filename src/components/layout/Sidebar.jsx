@@ -50,9 +50,9 @@ const Sidebar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <aside className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-sidebar-background border-r border-sidebar-border">
+    <aside className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-sidebar-background border-r border-sidebar-border transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
       <ScrollArea className="h-full">
-        <div className="p-4 space-y-6">
+        <div className="p-2 md:p-4 space-y-4 md:space-y-6">
           {/* Main Navigation */}
           <div className="space-y-1">
             {mainLinks.map((link) => (

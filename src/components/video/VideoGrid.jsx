@@ -1,6 +1,8 @@
 import VideoCard from "./VideoCard";
+import { useVideos } from "@/hooks/useVideos";
+import { Skeleton } from "@/components/ui/skeleton";
 
-// Mock data for demonstration
+// Mock data fallback
 const mockVideos = [
   {
     id: "1",
@@ -77,10 +79,53 @@ const mockVideos = [
 ];
 
 const VideoGrid = () => {
+  const { data: videosResponse, isLoading, error } = useVideos();
+
+  if (isLoading) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 md:gap-6">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <div key={i} className="space-y-3">
+            <Skeleton className="aspect-video w-full rounded-lg" />
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-3 w-3/4" />
+              <Skeleton className="h-3 w-1/2" />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 md:gap-6">
+        {mockVideos.map((video) => (
+          <VideoCard key={video.id} {...video} />
+        ))}
+      </div>
+    );
+  }
+
+  const videos = videosResponse?.data?.docs || mockVideos;
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {mockVideos.map((video) => (
-        <VideoCard key={video.id} {...video} />
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 md:gap-6">
+      {videos.map((video) => (
+        <VideoCard 
+          key={video._id || video.id} 
+          id={video._id || video.id}
+          title={video.title}
+          thumbnail={video.thumbnail?.url || video.thumbnail}
+          duration={video.duration}
+          views={video.views}
+          createdAt={video.createdAt}
+          channel={{
+            name: video.owner?.username || video.channel?.name,
+            avatar: video.owner?.avatar?.url || video.channel?.avatar
+          }}
+        />
       ))}
     </div>
   );
