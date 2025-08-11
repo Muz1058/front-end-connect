@@ -47,7 +47,7 @@ const Sidebar = () => {
     { icon: Flag, label: "Send Feedback", path: "/feedback" }
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path) => location.pathname === path;
 
   return (
     <aside className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-sidebar-background border-r border-sidebar-border">
