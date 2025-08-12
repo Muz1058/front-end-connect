@@ -1,4 +1,8 @@
+// Replace with your deployed backend URL once it's live
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
+
+// TODO: Update this URL to your deployed backend
+// Example: const API_BASE_URL = 'https://your-backend.railway.app/api/v1';
 
 class ApiService {
   constructor() {
